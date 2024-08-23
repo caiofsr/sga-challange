@@ -1,3 +1,4 @@
+import { HttpStatus } from '@nestjs/common';
 import { CreateTutorialUseCase } from './create';
 import { Tutorial } from 'src/application/entities/tutorial';
 import { TutorialRepository } from 'src/application/repositories/tutorial.repository';
@@ -13,8 +14,9 @@ describe('Create Tutorial', () => {
   });
 
   it('should create a new tutorial', async () => {
-    const tutorial = await useCase.execute({ title: 'Hello World' });
+    const { status, data: tutorial } = await useCase.execute({ title: 'Hello World' });
 
+    expect(status).toBe(HttpStatus.CREATED);
     expect(tutorial).toBeInstanceOf(Tutorial);
     expect(tutorial.id).toBeTruthy();
     expect(tutorial.title).toBe('Hello World');
