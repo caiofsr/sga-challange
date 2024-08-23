@@ -8,6 +8,10 @@ export class InMemoryTutorialRepository implements TutorialRepository {
     return this.items;
   }
 
+  async findById(id: string): Promise<Tutorial> {
+    return this.items.find((item) => item.id === id);
+  }
+
   async save(tutorial: Tutorial): Promise<Tutorial> {
     const index = this.items.findIndex((item) => item.id === tutorial.id);
 

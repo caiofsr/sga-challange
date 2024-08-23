@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-type TutorialProps = {
+export type TutorialProps = {
   id?: string;
   title: string;
   createdAt?: Date;
@@ -14,10 +14,15 @@ export class Tutorial {
   updatedAt?: Date;
 
   constructor(props: TutorialProps) {
+    this.id = props.id ?? randomUUID();
+    this.title = props.title;
+    this.createdAt = props.createdAt ?? new Date();
+    this.updatedAt = props.updatedAt ?? new Date();
+  }
+
+  update(props: Pick<TutorialProps, 'title'>) {
     Object.assign(this, {
-      id: props.id ?? randomUUID(),
-      createdAt: props.createdAt ?? new Date(),
-      updatedAt: props.updatedAt ?? new Date(),
+      updatedAt: new Date(),
       ...props,
     });
   }
