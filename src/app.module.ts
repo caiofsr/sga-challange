@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { PrismaModule } from 'nestjs-prisma';
+import { HttpModule } from './http/http.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { DatabaseModule } from './infra/database/database.module';
 
 @Module({
   imports: [
@@ -22,8 +24,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         ttl: Number(config.get('REDIS_TTL', 0)),
       }),
     }),
+    DatabaseModule,
+    HttpModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
