@@ -9,4 +9,7 @@ CREATE TABLE "tutorials" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "tutorials_title_key" ON "tutorials"("title");
+
+-- CreateIndex
 CREATE INDEX "tutorials_title_created_at_updated_at_idx" ON "tutorials"("title", "created_at", "updated_at");
