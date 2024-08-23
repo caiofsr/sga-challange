@@ -13,3 +13,7 @@ Content-Type: application/json
 {
   "title": "Updated Tutorial"
 }
+
+###
+
+DELETE http://localhost:3000/tutorials/0e2ad9cd-495b-44bd-a14e-a966108d4b73

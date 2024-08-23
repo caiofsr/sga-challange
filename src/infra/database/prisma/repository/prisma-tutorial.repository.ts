@@ -7,6 +7,7 @@ import { TutorialRepository } from 'src/application/repositories/tutorial.reposi
 @Injectable()
 export class PrismaTutorialRepository implements TutorialRepository {
   constructor(private readonly prismaService: PrismaService) {}
+
   async findById(id: string): Promise<Tutorial | undefined> {
     const tutorial = await this.prismaService.tutorial.findUnique({
       where: {
@@ -38,7 +39,11 @@ export class PrismaTutorialRepository implements TutorialRepository {
     return PrismaTutorialMapper.toDomain(savedTutorial);
   }
 
-  delete(tutorial: Tutorial): Promise<void> {
-    throw new Error('Method not implemented.');
+  async delete(tutorial: Tutorial): Promise<void> {
+    await this.prismaService.tutorial.delete({
+      where: {
+        id: tutorial.id,
+      },
+    });
   }
 }
