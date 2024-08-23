@@ -1,9 +1,9 @@
-import { Body, Controller, Param, Patch, Post, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { CreateTutorialBody } from '../dtos/create-tutorial.dto';
+import { UpdateTutorialBody } from '../dtos/update-tutorial.dto';
+import { Body, Controller, Param, Patch, Post, Res } from '@nestjs/common';
 import { CreateTutorialUseCase } from 'src/application/use-cases/tutorial/create';
 import { UpdateTutorialUseCase } from 'src/application/use-cases/tutorial/update';
-import { UpdateTutorialBody } from '../dtos/update-tutorial.dto';
-import { Response } from 'express';
 
 @Controller('tutorials')
 export class TutorialController {
@@ -13,8 +13,10 @@ export class TutorialController {
   ) {}
 
   @Post()
-  createTutorial(@Body() { title }: CreateTutorialBody) {
-    return this.createUseCase.execute({ title });
+  async createTutorial(@Body() { title }: CreateTutorialBody, @Res() response: Response) {
+    const { data, status } = await this.createUseCase.execute({ title });
+
+    return response.status(status).json(data);
   }
 
   @Patch('/:id')
