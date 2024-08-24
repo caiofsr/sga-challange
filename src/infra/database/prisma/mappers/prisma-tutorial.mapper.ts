@@ -1,5 +1,6 @@
 import { Tutorial as PrismaTutorial } from '@prisma/client';
 import { Tutorial } from 'src/application/entities/tutorial';
+import { PrismaPaginatedResponse } from '../utils/pagination';
 
 export class PrismaTutorialMapper {
   static toPrisma(tutorial: Tutorial) {
@@ -18,5 +19,12 @@ export class PrismaTutorialMapper {
       createdAt: tutorial.createdAt,
       updatedAt: tutorial.updatedAt,
     });
+  }
+
+  static toDomainPaginated({ meta, data }: PrismaPaginatedResponse) {
+    return {
+      data: data.map(this.toDomain),
+      meta,
+    };
   }
 }

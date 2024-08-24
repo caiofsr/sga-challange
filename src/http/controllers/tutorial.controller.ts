@@ -1,10 +1,12 @@
 import { Response } from 'express';
 import { CreateTutorialBody } from '../dtos/create-tutorial.dto';
 import { UpdateTutorialBody } from '../dtos/update-tutorial.dto';
+import { IndexTutorialQueryDto } from '../dtos/index-tutorial-query.dto';
 import { CreateTutorialUseCase } from 'src/application/use-cases/tutorial/create';
 import { UpdateTutorialUseCase } from 'src/application/use-cases/tutorial/update';
 import { DeleteTutorialUseCase } from 'src/application/use-cases/tutorial/delete';
-import { Body, Controller, Delete, Param, Patch, Post, Res } from '@nestjs/common';
+import { GetAllTutorialsUseCase } from 'src/application/use-cases/tutorial/getAll';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
 
 @Controller('tutorials')
 export class TutorialController {
@@ -12,7 +14,14 @@ export class TutorialController {
     private readonly createUseCase: CreateTutorialUseCase,
     private readonly updateUseCase: UpdateTutorialUseCase,
     private readonly deleteUseCase: DeleteTutorialUseCase,
+    private readonly findAllUseCase: GetAllTutorialsUseCase,
   ) {}
+  @Get()
+  async getAllTutorials(@Res() response: Response, @Query() query: IndexTutorialQueryDto) {
+    const { data, status } = await this.findAllUseCase.execute(query);
+
+    return response.status(status).json(data);
+  }
 
   @Post()
   async createTutorial(@Body() { title }: CreateTutorialBody, @Res() response: Response) {

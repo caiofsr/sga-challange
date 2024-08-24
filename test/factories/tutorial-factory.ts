@@ -11,3 +11,7 @@ export function makeTutorial(override: Override = {}) {
     updatedAt: override.updatedAt,
   });
 }
+
+export function makeManyTutorials(count: number) {
+  return Array.from({ length: count }, () => makeTutorial());
+}

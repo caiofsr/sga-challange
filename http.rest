@@ -17,3 +17,8 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3000/tutorials/0e2ad9cd-495b-44bd-a14e-a966108d4b73
+
+
+###
+
+GET http://localhost:3000/tutorials?title=dia+22&createdAt=2024-08-22T16:02:04.319Z
