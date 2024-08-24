@@ -16,11 +16,12 @@ export class TutorialController {
     private readonly deleteUseCase: DeleteTutorialUseCase,
     private readonly findAllUseCase: GetAllTutorialsUseCase,
   ) {}
-  @Get()
-  async getAllTutorials(@Res() response: Response, @Query() query: IndexTutorialQueryDto) {
-    const { data, status } = await this.findAllUseCase.execute(query);
 
-    return response.status(status).json(data);
+  @Get()
+  async getAllTutorials(@Query() query: IndexTutorialQueryDto) {
+    const { data } = await this.findAllUseCase.execute(query);
+
+    return data;
   }
 
   @Post()

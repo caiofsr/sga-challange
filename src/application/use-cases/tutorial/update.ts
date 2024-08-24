@@ -1,5 +1,6 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Cache } from 'cache-manager';
 import { Tutorial } from 'src/application/entities/tutorial';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { ErrorResponse } from 'src/application/types/error-response';
 import { SuccessResponse } from 'src/application/types/success-response';
 import { TutorialRepository } from 'src/application/repositories/tutorial.repository';
@@ -13,7 +14,10 @@ type UpdateTutorialResponse = SuccessResponse<Tutorial> | ErrorResponse;
 
 @Injectable()
 export class UpdateTutorialUseCase {
-  constructor(private readonly tutorialRepository: TutorialRepository) {}
+  constructor(
+    private readonly tutorialRepository: TutorialRepository,
+    @Inject('CACHE_MANAGER') private cacheManager: Cache,
+  ) {}
 
   async execute(request: UpdateTutorialRequest): Promise<UpdateTutorialResponse> {
     const tutorial = await this.tutorialRepository.findById(request.id);
@@ -30,6 +34,8 @@ export class UpdateTutorialUseCase {
     tutorial.update({ title: request.title });
 
     await this.tutorialRepository.save(tutorial);
+
+    await this.cacheManager.reset();
 
     return {
       data: tutorial,
