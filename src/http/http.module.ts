@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
+import { UserController } from './controllers/user.controller';
 import { DatabaseModule } from 'src/infra/database/database.module';
 import { TutorialController } from './controllers/tutorial.controller';
+import { CreateUserUseCase } from 'src/application/use-cases/user/create';
 import { CreateTutorialUseCase } from 'src/application/use-cases/tutorial/create';
 import { UpdateTutorialUseCase } from 'src/application/use-cases/tutorial/update';
 import { DeleteTutorialUseCase } from 'src/application/use-cases/tutorial/delete';
@@ -8,7 +10,13 @@ import { GetAllTutorialsUseCase } from 'src/application/use-cases/tutorial/getAl
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [TutorialController],
-  providers: [CreateTutorialUseCase, UpdateTutorialUseCase, DeleteTutorialUseCase, GetAllTutorialsUseCase],
+  controllers: [TutorialController, UserController],
+  providers: [
+    CreateUserUseCase,
+    CreateTutorialUseCase,
+    UpdateTutorialUseCase,
+    DeleteTutorialUseCase,
+    GetAllTutorialsUseCase,
+  ],
 })
 export class HttpModule {}
