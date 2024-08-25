@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { ApiProperty } from '@nestjs/swagger';
 
 export type TutorialProps = {
   id?: string;
@@ -8,10 +9,17 @@ export type TutorialProps = {
 };
 
 export class Tutorial {
-  id?: string;
+  @ApiProperty({ format: 'uuid' })
+  id: string;
+
+  @ApiProperty()
   title: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+
+  @ApiProperty()
+  createdAt: Date;
+
+  @ApiProperty()
+  updatedAt: Date;
 
   constructor(props: TutorialProps) {
     this.id = props.id ?? randomUUID();
