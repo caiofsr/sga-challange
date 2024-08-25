@@ -18,10 +18,11 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiNoContentResponse,
+  ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
-@Controller('tutorials')
 @ApiTags('Tutorials')
+@Controller('tutorials')
 @ApiCookieAuth('Authorization')
 export class TutorialController {
   constructor(
@@ -44,6 +45,18 @@ export class TutorialController {
   @Post()
   @ApiCreatedResponse({ type: Tutorial })
   @ApiOperation({ summary: 'Create tutorial' })
+  @ApiUnprocessableEntityResponse({
+    description: 'Tutorial already exists',
+    schema: {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string',
+          example: 'This record already exists',
+        },
+      },
+    },
+  })
   async createTutorial(@Body() { title }: CreateTutorialBody, @Res() response: Response) {
     const { data, status } = await this.createUseCase.execute({ title });
 
