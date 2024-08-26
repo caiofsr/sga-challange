@@ -3,14 +3,19 @@ import { CreateTutorialUseCase } from './create';
 import { Tutorial } from 'src/application/entities/tutorial';
 import { TutorialRepository } from 'src/application/repositories/tutorial.repository';
 import { InMemoryTutorialRepository } from 'test/repositories/in-memory-tutorial.repository';
+import { Cache } from 'cache-manager';
 
 describe('Create Tutorial', () => {
+  let cacheManager: Partial<Cache>;
   let useCase: CreateTutorialUseCase;
   let tutorialRepository: TutorialRepository;
 
   beforeAll(() => {
     tutorialRepository = new InMemoryTutorialRepository();
-    useCase = new CreateTutorialUseCase(tutorialRepository);
+    cacheManager = {
+      reset: jest.fn(),
+    };
+    useCase = new CreateTutorialUseCase(tutorialRepository, cacheManager as Cache);
   });
 
   it('should create a new tutorial', async () => {
@@ -22,5 +27,6 @@ describe('Create Tutorial', () => {
     expect(tutorial.title).toBe('Hello World');
     expect(tutorial.createdAt).toBeInstanceOf(Date);
     expect(tutorial.updatedAt).toBeInstanceOf(Date);
+    expect(cacheManager.reset).toHaveBeenCalledTimes(1);
   });
 });
