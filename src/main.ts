@@ -1,4 +1,5 @@
 import { AppModule } from './app.module';
+import * as cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
 import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { PrismaClientExceptionFilter } from 'nestjs-prisma';
@@ -20,6 +21,8 @@ async function bootstrap() {
   );
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+
+  app.use(cookieParser());
 
   await app.listen(app.get(ConfigService).getOrThrow('PORT'));
 }

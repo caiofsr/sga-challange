@@ -4,13 +4,14 @@ import { Tutorial } from 'src/application/entities/tutorial';
 import { CreateTutorialBody } from '../dtos/create-tutorial.dto';
 import { UpdateTutorialBody } from '../dtos/update-tutorial.dto';
 import { manyQueryTutorials } from '../utils/many-query-tutorials';
+import { JwtAuthGuard } from 'src/infra/auth/guards/jwt-auth.guard';
 import { IndexTutorialQueryDto } from '../dtos/index-tutorial-query.dto';
 import { ApiPaginatedResponse } from '../decorators/api-paginated-response';
 import { CreateTutorialUseCase } from 'src/application/use-cases/tutorial/create';
 import { UpdateTutorialUseCase } from 'src/application/use-cases/tutorial/update';
 import { DeleteTutorialUseCase } from 'src/application/use-cases/tutorial/delete';
 import { GetAllTutorialsUseCase } from 'src/application/use-cases/tutorial/getAll';
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Res, UseGuards } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -23,6 +24,7 @@ import {
 
 @ApiTags('Tutorials')
 @Controller('tutorials')
+@UseGuards(JwtAuthGuard)
 @ApiCookieAuth('Authorization')
 export class TutorialController {
   constructor(

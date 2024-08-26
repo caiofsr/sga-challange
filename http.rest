@@ -1,5 +1,26 @@
-POST http://localhost:3000/tutorials
+POST http://localhost:3333/users/signup
 Content-Type: application/json
+
+{
+  "username": "username",
+  "password": "Password@1234"
+}
+
+###
+
+POST http://localhost:3333/users/login
+Content-Type: application/json
+
+{
+  "username": "username",
+  "password": "Password@1234"
+}
+
+###
+
+POST http://localhost:3333/tutorials
+Content-Type: application/json
+Cookie: Authentication=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiY2ZiMjRmZi1iMDljLTRkMjMtYTY1Yy01Y2EyZmYyNmMxOWYiLCJ1c2VybmFtZSI6InVzZWFzcm5hbWVhIiwiaWF0IjoxNzI0Njg0NjQ4LCJleHAiOjE3MjQ2ODQ2NTF9.S1as5BhEjjjC7WLcBDgGXZf0FR6QUxNWz5nStyTrgis; Path=/; Expires=Tue, 27 Aug 2024 15:04:08 GMT; HttpOnly; Secure
 
 {
   "title": "Hello World"
@@ -7,8 +28,9 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/tutorials/0e2ad9cd-495b-44bd-a14e-a966108d4b73
+PATCH http://localhost:3333/tutorials/0e2ad9cd-495b-44bd-a14e-a966108d4b73
 Content-Type: application/json
+Cookie: Authentication=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiY2ZiMjRmZi1iMDljLTRkMjMtYTY1Yy01Y2EyZmYyNmMxOWYiLCJ1c2VybmFtZSI6InVzZWFzcm5hbWVhIiwiaWF0IjoxNzI0Njg0NjQ4LCJleHAiOjE3MjQ2ODQ2NTF9.S1as5BhEjjjC7WLcBDgGXZf0FR6QUxNWz5nStyTrgis; Path=/; Expires=Tue, 27 Aug 2024 15:04:08 GMT; HttpOnly; Secure
 
 {
   "title": "Updated Tutorial"
@@ -16,9 +38,11 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/tutorials/0e2ad9cd-495b-44bd-a14e-a966108d4b73
+DELETE http://localhost:3333/tutorials/0e2ad9cd-495b-44bd-a14e-a966108d4b73
+Cookie: Authentication=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiY2ZiMjRmZi1iMDljLTRkMjMtYTY1Yy01Y2EyZmYyNmMxOWYiLCJ1c2VybmFtZSI6InVzZWFzcm5hbWVhIiwiaWF0IjoxNzI0Njg0NjQ4LCJleHAiOjE3MjQ2ODQ2NTF9.S1as5BhEjjjC7WLcBDgGXZf0FR6QUxNWz5nStyTrgis; Path=/; Expires=Tue, 27 Aug 2024 15:04:08 GMT; HttpOnly; Secure
 
 
 ###
 
-GET http://localhost:3000/tutorials?title=dia+22&createdAt=2024-08-22T16:02:04.319Z
+GET http://localhost:3333/tutorials?title=dia+22&createdAt=2024-08-22T16:02:04.319Z
+Cookie: Authentication=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiY2ZiMjRmZi1iMDljLTRkMjMtYTY1Yy01Y2EyZmYyNmMxOWYiLCJ1c2VybmFtZSI6InVzZWFzcm5hbWVhIiwiaWF0IjoxNzI0Njg0NjQ4LCJleHAiOjE3MjQ2ODQ2NTF9.S1as5BhEjjjC7WLcBDgGXZf0FR6QUxNWz5nStyTrgis; Path=/; Expires=Tue, 27 Aug 2024 15:04:08 GMT; HttpOnly; Secure

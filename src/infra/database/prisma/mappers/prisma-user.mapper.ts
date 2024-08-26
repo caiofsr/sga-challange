@@ -13,7 +13,7 @@ export class PrismaUserMapper {
   }
 
   static toDomain(user: PrismaUser, omit?: [keyof UserProps]): User {
-    if (omit.length > 0) {
+    if (omit?.length > 0) {
       for (const key of omit) {
         delete user[key];
       }

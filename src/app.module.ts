@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { HttpModule } from './http/http.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-yet';
+import { AuthModule } from './infra/auth/auth.module';
 import { DatabaseModule } from './infra/database/database.module';
 
 @Module({
@@ -23,6 +24,7 @@ import { DatabaseModule } from './infra/database/database.module';
     }),
     DatabaseModule,
     HttpModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
